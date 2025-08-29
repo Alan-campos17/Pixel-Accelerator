@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Accelerator - Jogo Educativo de Programação</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .pixel-art {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+        
+        @keyframes moveCharacter {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .character {
+            animation: moveCharacter 2s ease-in-out infinite;
+        }
+        
+        .code-editor {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            tab-size: 4;
+            -moz-tab-size: 4;
+        }
+        
+        .grid-cell {
+            transition: all 0.3s ease;
+        }
+        
+        .grid-cell:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(66, 153, 225, 0.5);
+        }
+        
+        .challenge-complete {
+            background: linear-gradient(45deg, #48bb78, #38a169);
+            border-color: #276749;
+        }
+    </style>
+</head>
+<body class="text-white">
+    <div class="game-container">
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
+                🎮 Pixel Accelerator
+            </h1>
+            <p class="text-gray-300 mt-2">Aprenda programação de forma divertida!</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Mapa e Personagem -->
+            <div class="lg:col-span-2 bg-gray-800 rounded-lg p-6 shadow-lg">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-blue-300">Mapa da Aventura</h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-gray-700 px-4 py-2 rounded">
+                            <span class="text-green-400">Nível: </span>
+                            <span id="level">1</span>
+                        </div>
+                        <div class="bg-gray-700 px-4 py-2 rounded">
+                            <span class="text-yellow-400">Pontos: </span>
+                            <span id="points">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grid do Mapa -->
+                <div class="grid grid-cols-5 gap-3 p-4 bg-gray-900 rounded-lg">
+                    <!-- Células do mapa - serão geradas via JavaScript -->
+                </div>
+
+                <!-- Controles -->
+                <div class="mt-6 flex justify-center space-x-4">
+                    <button onclick="moveCharacter('up')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                        ↑ Cima
+                    </button>
+                    <button onclick="moveCharacter('down')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                        ↓ Baixo
+                    </button>
+                    <button onclick="moveCharacter('left')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                        ← Esquerda
+                    </button>
+                    <button onclick="moveCharacter('right')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded">
+                        → Direita
+                    </button>
+                </div>
+            </div>
+
+            <!-- Área de Programação -->
+            <div class="bg-gray-800 rounded-lg p-6 shadow-lg">
+                <h2 class="text-2xl font-bold text-green-400 mb-4">Desafio de Programação</h2>
+                
+                <div class="bg-gray-900 p-4 rounded-lg mb-4">
+                    <h3 class="text-lg font-semibold text-yellow-300 mb-2" id="challenge-title">
+                        Desafio #1: Movimento Básico
+                    </h3>
+                    <p class="text-gray-300" id="challenge-description">
+                        Use as funções disponíveis para mover o personagem até o objetivo. 
+                        Exemplo: moveRight(3) - move 3 casas para direita.
+                    </p>
+                </div>
+
+                <!-- Editor de Código -->
+                <div class="mb-4">
+                    <textarea 
+                        id="code-editor" 
+                        class="w-full h-48 bg-gray-900 text-green-400 p-4 rounded-lg code-editor resize-none"
+                        placeholder="Escreva seu código aqui..."
+                    >// Seu código vai aqui
+// Exemplo: 
+// moveRight(2);
+// moveDown(1);</textarea>
+                </div>
+
+                <div class="flex space-x-3">
+                    <button onclick="runCode()" class="flex-1 bg-green-600 hover:bg-green-700 px-4 py-3 rounded font-semibold">
+                        ▶ Executar Código
+                    </button>
+                    <button onclick="resetChallenge()" class="bg-gray-600 hover:bg-gray-700 px-4 py-3 rounded">
+                        🔄 Reiniciar
+                    </button>
+                </div>
+
+                <!-- Output -->
+                <div class="mt-4 bg-gray-900 p-4 rounded-lg">
+                    <h4 class="text-sm font-semibold text-gray-400 mb-2">Resultado:</h4>
+                    <div id="output" class="text-gray-300 text-sm">
+                        Aguardando execução...
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorial -->
+        <div class="mt-8 bg-gray-800 rounded-lg p-6">
+            <h2 class="text-2xl font-bold text-purple-400 mb-4">Como Jogar</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-blue-300">1. Escreva Código</h3>
+                    <p class="text-gray-300">Use as funções disponíveis no editor para resolver os desafios.</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-green-300">2. Execute</h3>
+                    <p class="text-gray-300">Clique em "Executar" para ver seu código em ação no mapa.</p>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-lg font-semibold text-yellow-300">3. Aprenda</h3>
+                    <p class="text-gray-300">Complete desafios para desbloquear novos conceitos de programação.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Estado do jogo
+        const gameState = {
+            characterPosition: { x: 2, y: 2 },
+            currentLevel: 1,
+            points: 0,
+            challenges: [
+                {
+                    id: 1,
+                    title: "Movimento Básico",
+                    description: "Use moveRight(2) e moveDown(1) para alcançar o objetivo.",
+                    objective: { x: 4, y: 3 },
+                    completed: false
+                },
+                {
+                    id: 2,
+                    title: "Loops Simples",
+                    description: "Use um loop para mover 4 casas para direita: for(let i=0; i<4; i++) { moveRight(1); }",
+                    objective: { x: 6, y: 2 },
+                    completed: false
+                },
+                {
+                    id: 3,
+                    title: "Condicionais",
+                    description: "Use if/else para tomar decisões baseadas na posição.",
+                    objective: { x: 3, y: 5 },
+                    completed: false
+                }
+            ]
+        };
+
+        // Inicialização
+        function initGame() {
+            generateMap();
+            updateUI();
+        }
+
+        // Gerar o grid do mapa
+        function generateMap() {
+            const gridContainer = document.querySelector('.grid');
+            gridContainer.innerHTML = '';
+            
+            for (let y = 0; y < 5; y++) {
+                for (let x = 0; x < 5; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'grid-cell bg-gray-700 rounded p-4 text-center relative';
+                    
+                    if (x === gameState.characterPosition.x && y === gameState.characterPosition.y) {
+                        cell.innerHTML = '<div class="character text-2xl">🧙</div>';
+                        cell.classList.add('bg-blue-600');
+                    } else if (x === 4 && y === 3) {
+                        cell.innerHTML = '<div class="text-2xl">🎯</div>';
+                        cell.classList.add('bg-green-600');
+                    } else {
+                        cell.innerHTML = '<div class="text-gray-400">·</div>';
+                    }
+                    
+                    gridContainer.appendChild(cell);
+                }
+            }
+        }
+
+        // Funções de movimento disponíveis para o jogador
+        function moveRight(steps = 1) {
+            gameState.characterPosition.x = Math.min(4, gameState.characterPosition.x + steps);
+            updateUI();
+            return `Moveu ${steps} casa(s) para direita`;
+        }
+
+        function moveLeft(steps = 1) {
+            gameState.characterPosition.x = Math.max(0, gameState.characterPosition.x - steps);
+            updateUI();
+            return `Moveu ${steps} casa(s) para esquerda`;
+        }
+
+        function moveUp(steps = 1) {
+            gameState.characterPosition.y = Math.max(0, gameState.characterPosition.y - steps);
+            updateUI();
+            return `Moveu ${steps} casa(s) para cima`;
+        }
+
+        function moveDown(steps = 1) {
+            gameState.characterPosition.y = Math.min(4, gameState.characterPosition.y + steps);
+            updateUI();
+            return `Moveu ${steps} casa(s) para baixo`;
+        }
+
+        // Movimento manual pelos botões
+        function moveCharacter(direction) {
+            switch(direction) {
+                case 'up': moveUp(1); break;
+                case 'down': moveDown(1); break;
+                case 'left': moveLeft(1); break;
+                case 'right': moveRight(1); break;
+            }
+            checkObjective();
+        }
+
+        // Executar código do editor
+        function runCode() {
+            const code = document.getElementById('code-editor').value;
+            const output = document.getElementById('output');
+            
+            try {
+                // Criar escopo seguro para executar o código
+                const executeCode = new Function(`
+                    try {
+                        ${code}
+                        return 'Código executado com sucesso!';
+                    } catch (error) {
+                        return 'Erro: ' + error.message;
+                    }
+                `);
+                
+                const result = executeCode();
+                output.innerHTML = `<span class="text-green-400">✓ ${result}</span>`;
+                checkObjective();
+            } catch (error) {
+                output.innerHTML = `<span class="text-red-400">✗ Erro: ${error.message}</span>`;
+            }
+        }
+
+        // Verificar se objetivo foi alcançado
+        function checkObjective() {
+            const currentChallenge = gameState.challenges[gameState.currentLevel - 1];
+            
+            if (gameState.characterPosition.x === currentChallenge.objective.x && 
+                gameState.characterPosition.y === currentChallenge.objective.y) {
+                
+                if (!currentChallenge.completed) {
+                    currentChallenge.completed = true;
+                    gameState.points += 100;
+                    gameState.currentLevel++;
+                    
+                    document.getElementById('output').innerHTML = 
+                        `<span class="text-yellow-400">🎉 Desafio completo! +100 pontos</span>`;
+                    
+                    updateUI();
+                    
+                    // Próximo desafio
+                    setTimeout(() => {
+                        if (gameState.currentLevel <= gameState.challenges.length) {
+                            alert(`Parabéns! Avançando para o nível ${gameState.currentLevel}`);
+                            resetCharacter();
+                        } else {
+                            alert('🎊 Você completou todos os desafios!');
+                        }
+                    }, 1000);
+                }
+            }
+        }
+
+        // Reiniciar desafio
+        function resetChallenge() {
+            resetCharacter();
+            document.getElementById('code-editor').value = '';
+            document.getElementById('output').innerHTML = 'Aguardando execução...';
+        }
+
+        function resetCharacter() {
+            gameState.characterPosition = { x: 2, y: 2 };
+            updateUI();
+        }
+
+        // Atualizar interface
+        function updateUI() {
+            generateMap();
+            document.getElementById('level').textContent = gameState.currentLevel;
+            document.getElementById('points').textContent = gameState.points;
+            
+            const currentChallenge = gameState.challenges[gameState.currentLevel - 1];
+            if (currentChallenge) {
+                document.getElementById('challenge-title').textContent = `Desafio #${currentChallenge.id}: ${currentChallenge.title}`;
+                document.getElementById('challenge-description').textContent = currentChallenge.description;
+            }
+        }
+
+        // Iniciar o jogo quando a página carregar
+        window.onload = initGame;
+    </script>
+</body>
+</html>
+
