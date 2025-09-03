@@ -5,39 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Um jogo de luta criado em HTML, CSS E JavaScript">
-    <link rel="shortcut icon" href="src/img/Attack/favicon/guerreiro-programando-em-um-computador.png" type="guerreiro/programador">
+    <meta name="description" content="Um jogo de RPG educativo criado em HTML, CSS e JavaScript">
+    <link rel="shortcut icon" href="src/img/favicon/guerreiro-programando-em-um-computador.png" type="image/png">
     <meta name="author" content="Alan Campos Macena">
-    <!-- CSS only -->
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- CSS custom -->
     <link rel="stylesheet" href="src/css/reset.css">
     <link rel="stylesheet" href="src/css/animacoes.css">
     <link rel="stylesheet" href="src/css/seletor-de-personagens/estilo.css">
-    <title>Choose your character</title>
+
+    <title>Code RPG - Selecione seu Personagem</title>
 </head>
 
 <body>
     <main>
         <header class="cabecalho">
-            <h1 class="title">Character Select</h1>
+            <h1 class="title">Seleção de Personagem</h1>
         </header>
 
         <section class="selection">
 
-            <!-- Player 1 -->
+            <!-- Player 1 (Personagem grande em destaque) -->
             <div class="big__character player__number-1">
-                <img src="img/Attack/knight.png" alt="Imagem do personagem selecionado número um"
+                <img src="src/img/knight.png" alt="Imagem do personagem selecionado número um"
                     id="selected__character">
                 <div class="name__character">
-                    <h2 id="nome-jogador-01">knight</h2>
+                    <h2 id="nome-jogador-01">Knight</h2>
                 </div>
             </div>
 
-            <!-- Characters -->
+            <!-- Lista de personagens -->
             <ul class="characters__list">
-                <li class="character seleted" id="viuva-negra" data-name="Viúva Negra" data-number="01">
+                <li class="character selected" id="knight" data-name="Knight" data-number="01">
                     <span class="tag">1P</span>
-                    <img src="src/imagens/viuva-negra.jpg" alt="Imagem miniatura do personagem Viúva Negra da Marvel">
+                    <img src="src/img/knight.png" alt="Miniatura do personagem Knight">
                 </li>
- </section>
+                <!-- Aqui depois você pode adicionar outros personagens (mago, rogue, etc) -->
+            </ul>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="src/js/main.js"></script>
+</body>
+</html>
