@@ -1,55 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Um jogo de RPG educativo criado em HTML, CSS e JavaScript">
-    <link rel="shortcut icon" href="src/img/favicon/guerreiro-programando-em-um-computador.png" type="image/png">
-    <meta name="author" content="Alan Campos Macena">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Um jogo de RPG educativo criado em HTML, CSS e JavaScript">
+  <link rel="shortcut icon" href="src/imagens/favicon/favicon2.png" type="image/png">
+  <meta name="author" content="Alan Campos Macena">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!-- CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="src/css/reset.css">
+  <link rel="stylesheet" href="src/css/animacoes.css">
+  <link rel="stylesheet" href="src/css/seletor-de-personagens/estilo.css">
 
-    <!-- CSS custom -->
-    <link rel="stylesheet" href="src/css/reset.css">
-    <link rel="stylesheet" href="src/css/animacoes.css">
-    <link rel="stylesheet" href="src/css/seletor-de-personagens/estilo.css">
-
-    <title>Code RPG - Selecione seu Personagem</title>
+  <title>Code RPG - Selecione seu Personagem</title>
 </head>
-
 <body>
-    <main>
-        <header class="cabecalho">
-            <h1 class="title">Seleção de Personagem</h1>
-        </header>
+  <main>
+    <header class="cabecalho">
+      <h1 class="title">Seleção de Personagem</h1>
+    </header>
 
-        <section class="selection">
+    <section class="selection">
 
-            <!-- Player 1 (Personagem grande em destaque) -->
-            <div class="big__character player__number-1">
-                <img src="src/imagens/Attack/knight.png" alt="Imagem do personagem selecionado número um"
-                    id="selected__character">
-                <div class="name__character">
-                    <h2 id="nome-jogador-01">Knight</h2>
-                </div>
-            </div>
+      <!-- Player 1 (Personagem grande em destaque) -->
+      <div class="big__character player__number-1">
+        <img src="src/imagens/knight-big.png" alt="Imagem do personagem 1" id="selected__character">
+        <div class="name__character">
+          <h2 id="nome-jogador-01">Knight</h2>
+        </div>
+      </div>
 
-            <!-- Lista de personagens -->
-            <ul class="characters__list">
-                <li class="character selected" id="knight" data-name="Knight" data-number="01">
-                    <span class="tag">1P</span>
-                    <img src="src/imagens/Attack/attack0.png" alt="Miniatura do personagem Knight">
-                </li>
-                <!-- Aqui depois você pode adicionar outros personagens (mago, rogue, etc) -->
-            </ul>
-        </section>
-    </main>
+      <!-- Lista de personagens -->
+      <ul class="characters__list">
+        <!-- Exemplo de item (adicione quantos quiser) -->
+        <li class="character selected" id="knight" data-name="Knight" data-number="01">
+          <span class="tag">1P</span>
+          <img src="src/imagens/Attack/attack0.png" alt="Knight mini">
+        </li>
 
-    <!-- Scripts -->
-    <script src="src/js/main.js"></script>
+        <li class="character" id="mage" data-name="Mage" data-number="02">
+          <span class="tag">--</span>
+          <img src="src/imagens/Mage/mage_idle1.png" alt="Mage mini">
+        </li>
+
+        <li class="character" id="rogue" data-name="Rogue" data-number="03">
+          <span class="tag">--</span>
+          <img src="src/imagens/Rogue/rogue_idle1.png" alt="Rogue mini">
+        </li>
+      </ul>
+
+      <!-- Player 2 (segundo slot) -->
+      <div class="big__character player__number-2">
+        <img src="src/imagens/rogue-big.png" alt="Imagem do personagem 2">
+        <div class="name__character">
+          <h2>Rogue</h2>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Card de descrição (obrigatório para main.js) -->
+  <section id="card__description" style="display:none;">
+    <div class="card">
+      <div class="content__title">
+        <h2 id="title__name">Nome</h2>
+        <img id="title_thumbanail" src="src/imagens/preview-image.png" alt="thumbnail" class="card-img-y rounded color-change-2x">
+      </div>
+      <div class="content__text">
+        <div class="text__box">
+          <p id="box__descrition" class="text-center">
+            Descrição do personagem...
+          </p>
+        </div>
+      </div>
+      <div class="content__buttons">
+        <button id="conf" class="button__style confirmar">Confirmar</button>
+        <button id="canc" class="button__style cancelar">Cancelar</button>
+      </div>
+      <p id="card__link"><a href="#" target="_blank">Data provided</a></p>
+    </div>
+  </section>
+
+  <!-- Scripts (importantíssimo: settings antes do main) -->
+  <script src="src/js/characterSettings.js"></script> <!-- define 'settings' -->
+  <script src="src/js/main.js"></script>              <!-- seu script de seleção -->
 </body>
 </html>
