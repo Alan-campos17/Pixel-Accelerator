@@ -16,7 +16,8 @@ personagens.forEach((personagem) => {
     // Atualizar imagem grande
     const idSelecionado = personagem.getAttribute('id');
     const imagemJg1 = document.getElementById('selected__character');
-    imagemJg1.src = `src/imagens/${idSelecionado}.png`;
+    setSelectedImage(idSelecionado);
+
 
     // Atualizar nome
     const nameJg1 = document.getElementById('nome-jogador-01');
