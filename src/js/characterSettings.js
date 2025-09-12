@@ -1,7 +1,7 @@
 const settings = [
   {
     nome: 'knight',
-    perfil: '../imagens/perfil/knight.png',
+    perfil: '../imagens/perfil/knight',
     sprites: {
       idle: {
         imgSrc: '../imagens/Attack/Idle/idle1.png',
