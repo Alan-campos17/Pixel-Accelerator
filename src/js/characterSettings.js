@@ -1,56 +1,106 @@
 const settings = [
   {
-    name: 'knight',
+    nome: 'knight',
+    perfil: '../imagens/perfil/knight.png',
     sprites: {
       idle: {
-        imgSrc: './img/Idle/idle1.png',
-        framesMax: 11
+        imgSrc: '../imagens/Attack/Idle/idle1.png',
+        framesMax: 6
       },
       run: {
-        imgSrc: './img/Run/run1.png',
-        framesMax: 6
-      },
-      walk: {
-        imgSrc: './img/Walk/walk1.png',
-        framesMax: 6
-      },
-      walk_attack: {
-        imgSrc: './img/Walk_Attack/walk_attack1.png',
-        framesMax: 6
+        imgSrc: '../imagens/Attack/Run/run1.png',
+        framesMax: 8
       },
       jump: {
-        imgSrc: './img/Jump/jump1.png',
+        imgSrc: '../imagens/Attack/Jump/jump1.png',
         framesMax: 4
       },
-      high_jump: {
-        imgSrc: './img/High_Jump/high_jump1.png',
-        framesMax: 6
+      fall: {
+        imgSrc: '../imagens/Attack/Fall/fall1.png',
+        framesMax: 4
       },
-      climb: {
-        imgSrc: './img/Climb/climb1.png',
-        framesMax: 6
-      },
-      push: {
-        imgSrc: './img/Push/push1.png',
-        framesMax: 6
-      },
-      attack: {
-        imgSrc: './img/Attack/attack1.png',
-        framesMax: 6
-      },
-      run_attack: {
-        imgSrc: './img/Run_Attack/run_attack1.png',
+      attack1: {
+        imgSrc: '../imagens/Attack/Attack/attack1.png',
         framesMax: 6
       },
       takeHit: {
-        imgSrc: './img/Hurt/hurt1.png',
+        imgSrc: '../imagens/Attack/Hurt/hurt1.png',
         framesMax: 3
       },
       death: {
-        imgSrc: './img/Death/death1.png',
+        imgSrc: '../imagens/Attack/Death/death1.png',
         framesMax: 6
       }
-    },
-    perfil: './img/knight.png'
+    }
+  },
+
+  {
+    nome: 'mage',
+    perfil: '../imagens/perfil/mago.png',
+    sprites: {
+      idle: {
+        imgSrc: '../imagens/Mage/Idle/idle1.png',
+        framesMax: 6
+      },
+      run: {
+        imgSrc: '../imagens/Mage/Run/run1.png',
+        framesMax: 8
+      },
+      jump: {
+        imgSrc: '../imagens/Mage/Jump/jump1.png',
+        framesMax: 4
+      },
+      fall: {
+        imgSrc: '../imagens/Mage/Fall/fall1.png',
+        framesMax: 4
+      },
+      attack1: {
+        imgSrc: '../imagens/Mage/Attack/attack1.png',
+        framesMax: 6
+      },
+      takeHit: {
+        imgSrc: '../imagens/Mago/Hurt/hurt1.png',
+        framesMax: 3
+      },
+      death: {
+        imgSrc: '../imagens/Mage/Death/death1.png',
+        framesMax: 6
+      }
+    }
+  },
+
+  {
+    nome: 'rogue',
+    perfil: '../imagens/perfil/rogue.png',
+    sprites: {
+      idle: {
+        imgSrc: '../imagens/Rogue/Idle/idle1.png',
+        framesMax: 6
+      },
+      run: {
+        imgSrc: '../imagens/Rogue/Run/run1.png',
+        framesMax: 8
+      },
+      jump: {
+        imgSrc: '../imagens/Rogue/Jump/jump1.png',
+        framesMax: 4
+      },
+      fall: {
+        imgSrc: '../imagens/Rogue/Fall/fall1.png',
+        framesMax: 4
+      },
+      attack1: {
+        imgSrc: '../imagens/Rogue/Attack/attack1.png',
+        framesMax: 6
+      },
+      takeHit: {
+        imgSrc: '../imagens/Rogue/Hurt/hurt1.png',
+        framesMax: 3
+      },
+      death: {
+        imgSrc: '../imagens/Rogue/Death/death1.png',
+        framesMax: 6
+      }
+    }
   }
 ];
