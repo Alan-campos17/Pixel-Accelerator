@@ -24,7 +24,7 @@ if (window.localStorage.PlayerOne && window.localStorage.PlayerTwo) {
     // Se não carregar, personagens padrões
     alert('A seleção de personagens deu errado :( Mas aproveite com os personagens padrões!');
     playerSettingOne = 'knight';
-    playerSettingTwo = 'Homem Aranha';
+    playerSettingTwo = 'mago';
 }
 
 // Montar sprites de cada jogador
