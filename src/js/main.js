@@ -16,7 +16,15 @@ personagens.forEach((personagem) => {
     // Atualizar imagem grande
     const idSelecionado = personagem.getAttribute('id');
     const imagemJg1 = document.getElementById('selected__character');
-  imagemJg1.src = `src/imagens/Attack/${idSelecionado}.png`;
+    let imgPath;
+    if (idSelecionado === 'mago') {
+      imgPath = 'src/imagens/Attack/mago/mage.png';
+    } else if (idSelecionado === 'rogue') {
+      imgPath = 'src/imagens/Attack/Rogue/rogue.png';
+    } else {
+      imgPath = `src/imagens/Attack/${idSelecionado}.png`;
+    }
+    imagemJg1.src = imgPath;
 
 
 
