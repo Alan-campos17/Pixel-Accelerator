@@ -2,17 +2,67 @@ body {
   background-color: #0c0c0c;
   color: white;
   font-family: 'Press Start 2P', monospace;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
   margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.game-container {
+.top-bar {
   display: flex;
-  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+  padding: 10px 20px;
+  border-bottom: 3px solid #00ffff;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player-info img {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #00ffff;
+  border-radius: 8px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.controls button, .controls a {
+  background-color: #00ffff;
+  color: #000;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.controls button:hover, .controls a:hover {
+  background-color: #00b4d8;
+}
+
+#volume {
+  width: 28px;
+  cursor: pointer;
+}
+
+.main-section {
+  display: flex;
+  justify-content: center;
   align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  flex-grow: 1;
 }
 
 #gameCanvas {
@@ -43,7 +93,7 @@ textarea {
   border-radius: 5px;
 }
 
-button {
+button#runButton {
   margin-top: 10px;
   background-color: #00ffff;
   color: #000;
@@ -54,6 +104,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button#runButton:hover {
   background-color: #00b4d8;
 }

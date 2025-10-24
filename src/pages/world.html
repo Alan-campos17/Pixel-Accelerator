@@ -38,6 +38,41 @@
   <audio src="../audio/music.mp4" loop></audio>
   <script src="../js/world.js"></script>
 
+  <!-- Biblioteca GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+  integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- Seus arquivos JS -->
+<script src="../js/characterSettings.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/classes.js"></script>
+<script src="../js/game.js"></script>
+
+<!-- Script de inicialização -->
+<script>
+  // Reiniciar o jogo
+  document.querySelector('#restart').addEventListener('click', () => {
+    window.location.reload();
+  });
+
+  // Controle de volume
+  const volume = document.querySelector('#volume');
+  const audio = document.querySelector('audio');
+  volume.addEventListener('click', () => {
+    if (volume.src.includes('muted.svg')) {
+      volume.src = '../svg/volume.svg';
+      audio.currentTime = 0;
+      audio.volume = 0.1;
+      audio.play();
+    } else {
+      volume.src = '../svg/muted.svg';
+      audio.pause();
+    }
+  });
+</script>
+
+
   <script>
     // 🧍‍♂️ Carregar personagem do localStorage
     let playerOne = localStorage.getItem('PlayerOne') || 'knight';
@@ -50,21 +85,6 @@
     // 🔄 Reiniciar jogo
     document.querySelector('#restart').addEventListener('click', () => {
       window.location.reload();
-    });
-
-    // 🔊 Controle de volume
-    let volume = document.querySelector('#volume');
-    let audio = document.querySelector('audio');
-    volume.addEventListener('click', () => {
-      if (volume.src.includes('muted.svg')) {
-        volume.src = '../svg/volume.svg';
-        audio.currentTime = 0;
-        audio.volume = 0.1;
-        audio.play();
-      } else {
-        volume.src = '../svg/muted.svg';
-        audio.pause();
-      }
     });
   </script>
 </body>
