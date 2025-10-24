@@ -44,7 +44,7 @@ personagens.forEach((personagem) => {
       return;
     }
 
-    // Redirecionar para a página do jogo
-    window.location.href = "src/pages/game.html";
+  // Redirecionar para a página do mundo
+  window.location.href = "src/pages/world.html";
   });
 });
