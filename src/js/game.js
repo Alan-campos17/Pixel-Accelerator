@@ -38,36 +38,27 @@ settings.forEach(e => {
         };
         perfilPlayer.src = e.perfil;
     }
-
-    // Define spritesPlayerTwo diretamente para o mago
-    spritesPlayerTwo = {
-        idle: {
-            imgSrc: '../imagens/mago/Idle/idle1.png',
-            framesMax: 6
-        },
-        run: {
-            imgSrc: '../imagens/mago/Run/run1.png',
-            framesMax: 8
-        },
-        jump: {
-            imgSrc: '../imagens/mago/Jump/jump1.png',
-            framesMax: 4
-        },
-        fall: {
-            imgSrc: '../imagens/mago/Fall/fall1.png',
-            attack1: e.sprites.attack1,
-            takeHit: e.sprites.takeHit,
-            death: e.sprites.death
-        };
-        perfilEnemy.src = e.perfil;
-    }
 });
+
+// Define spritesPlayerTwo diretamente para o mago
+spritesPlayerTwo = {
+    idle: { imgSrc: '../imagens/mago/Idle/idle1.png', framesMax: 6 },
+    run: { imgSrc: '../imagens/mago/Run/run1.png', framesMax: 8 },
+    jump: { imgSrc: '../imagens/mago/Jump/jump1.png', framesMax: 4 },
+    fall: { imgSrc: '../imagens/mago/Fall/fall1.png', framesMax: 4 },
+    attack1: { imgSrc: '../imagens/mago/Attack/attack1.png', framesMax: 6 },
+    takeHit: { imgSrc: '../imagens/mago/Hurt/hurt1.png', framesMax: 3 },
+    death: { imgSrc: '../imagens/mago/Death/death1.png', framesMax: 6 }
+};
+
+// Define a imagem do inimigo
+perfilEnemy.src = '../imagens/perfil/mago.png';
 
 // Mostrar nomes dos players
 let textPlayer = document.querySelector('.name-text-pl span');
 let textEnemy = document.querySelector('.name-text-en span');
 textPlayer.textContent = playerSettingOne;
-textEnemy.textContent = playerSettingTwo;
+textEnemy.textContent = 'Mago';
 
 // Configurações gerais
 const gravity = 0.7;
