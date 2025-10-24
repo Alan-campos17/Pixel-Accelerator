@@ -15,16 +15,13 @@ let perfilPlayer = document.querySelector('#image_player');
 let perfilEnemy = document.querySelector('#image_enemy');
 
 let playerSettingOne;
-let playerSettingTwo;
 
-if (window.localStorage.PlayerOne && window.localStorage.PlayerTwo) {
+if (window.localStorage.PlayerOne) {
     playerSettingOne = localStorage.getItem('PlayerOne');
-    playerSettingTwo = localStorage.getItem('PlayerTwo');
 } else {
-    // Se não carregar, personagens padrões
-    alert('A seleção de personagens deu errado :( Mas aproveite com os personagens padrões!');
+    // Se não carregar, personagem padrão
+    alert('A seleção de personagem deu errado :( Mas aproveite com o personagem padrão!');
     playerSettingOne = 'knight';
-    playerSettingTwo = 'mago';
 }
 
 // Montar sprites de cada jogador
@@ -42,12 +39,22 @@ settings.forEach(e => {
         perfilPlayer.src = e.perfil;
     }
 
-    if (playerSettingTwo === e.nome) {
-        spritesPlayerTwo = {
-            idle: e.sprites.idle,
-            run: e.sprites.run,
-            jump: e.sprites.jump,
-            fall: e.sprites.fall,
+    // Define spritesPlayerTwo diretamente para o mago
+    spritesPlayerTwo = {
+        idle: {
+            imgSrc: '../imagens/mago/Idle/idle1.png',
+            framesMax: 6
+        },
+        run: {
+            imgSrc: '../imagens/mago/Run/run1.png',
+            framesMax: 8
+        },
+        jump: {
+            imgSrc: '../imagens/mago/Jump/jump1.png',
+            framesMax: 4
+        },
+        fall: {
+            imgSrc: '../imagens/mago/Fall/fall1.png',
             attack1: e.sprites.attack1,
             takeHit: e.sprites.takeHit,
             death: e.sprites.death
