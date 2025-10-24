@@ -8,16 +8,64 @@
 </head>
 <body>
   <main class="game-container">
-    <canvas id="gameCanvas" width="800" height="480"></canvas>
+    <!-- HUD superior -->
+    <header class="top-bar">
+      <div class="player-info">
+        <img id="image_player" src="" alt="Miniatura do personagem">
+        <span id="player_name">Player</span>
+      </div>
 
-    <section class="code-panel">
-      <h2>Digite seu código:</h2>
-      <textarea id="codeInput" placeholder="Ex: mover('direita')"></textarea>
-      <button id="runButton">Executar</button>
-      <p id="feedback"></p>
+      <div class="controls">
+        <button id="restart">Reiniciar</button>
+        <a href="../../index.html">Trocar personagem</a>
+        <img src="../svg/muted.svg" id="volume" alt="volume">
+      </div>
+    </header>
+
+    <!-- Canvas e área de código -->
+    <section class="main-section">
+      <canvas id="gameCanvas" width="800" height="480"></canvas>
+
+      <div class="code-panel">
+        <h2>Digite seu código:</h2>
+        <textarea id="codeInput" placeholder="Ex: mover('direita')"></textarea>
+        <button id="runButton">Executar</button>
+        <p id="feedback"></p>
+      </div>
     </section>
   </main>
 
+  <audio src="../audio/music.mp4" loop></audio>
   <script src="../js/world.js"></script>
+
+  <script>
+    // 🧍‍♂️ Carregar personagem do localStorage
+    let playerOne = localStorage.getItem('PlayerOne') || 'knight';
+    const playerImg = document.querySelector('#image_player');
+    const playerName = document.querySelector('#player_name');
+
+    playerImg.src = `../imagens/${playerOne}.png`;
+    playerName.textContent = playerOne;
+
+    // 🔄 Reiniciar jogo
+    document.querySelector('#restart').addEventListener('click', () => {
+      window.location.reload();
+    });
+
+    // 🔊 Controle de volume
+    let volume = document.querySelector('#volume');
+    let audio = document.querySelector('audio');
+    volume.addEventListener('click', () => {
+      if (volume.src.includes('muted.svg')) {
+        volume.src = '../svg/volume.svg';
+        audio.currentTime = 0;
+        audio.volume = 0.1;
+        audio.play();
+      } else {
+        volume.src = '../svg/muted.svg';
+        audio.pause();
+      }
+    });
+  </script>
 </body>
 </html>
