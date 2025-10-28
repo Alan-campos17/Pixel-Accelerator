@@ -33,7 +33,7 @@ body {
 .controls {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .controls button, .controls a {
@@ -49,11 +49,6 @@ body {
 
 .controls button:hover, .controls a:hover {
   background-color: #00b4d8;
-}
-
-#volume {
-  width: 28px;
-  cursor: pointer;
 }
 
 .main-section {
@@ -106,4 +101,78 @@ button#runButton {
 
 button#runButton:hover {
   background-color: #00b4d8;
+}
+
+/* === Botão de Volume Retrô Neon === */
+.toggleSwitch {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #111;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #00ffff66, inset 0 0 8px #00ffff33;
+  overflow: hidden;
+  border: 2px solid #00ffff;
+}
+
+#checkboxInput {
+  display: none;
+}
+
+.speaker, 
+.mute-speaker {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+
+.speaker svg,
+.mute-speaker svg {
+  width: 22px;
+  height: 22px;
+  stroke: #00ffff;
+  fill: none;
+  stroke-width: 3px;
+  filter: drop-shadow(0 0 5px #00ffff);
+}
+
+.mute-speaker {
+  opacity: 1;
+}
+
+.speaker {
+  opacity: 0;
+}
+
+/* Quando ativado (som ligado) */
+#checkboxInput:checked + .toggleSwitch {
+  background-color: #00ffff22;
+  box-shadow: 0 0 15px #00ffffaa, inset 0 0 8px #00ffff33;
+}
+
+#checkboxInput:checked + .toggleSwitch .speaker {
+  opacity: 1;
+}
+
+#checkboxInput:checked + .toggleSwitch .mute-speaker {
+  opacity: 0;
+}
+
+/* Efeitos */
+#checkboxInput:active + .toggleSwitch {
+  transform: scale(0.9);
+  box-shadow: 0 0 20px #00ffff, 0 0 10px #00ffff;
+}
+
+#checkboxInput:hover + .toggleSwitch {
+  box-shadow: 0 0 18px #00ffff, inset 0 0 10px #00ffff66;
 }
