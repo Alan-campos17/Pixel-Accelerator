@@ -1,47 +1,134 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+// ...existing code...
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixel Accelerator - Mundo Aberto</title>
   <link rel="stylesheet" href="../css/world.css">
-</head>
-<body>
-  <main class="game-container">
-    <!-- HUD superior -->
-    <header class="top-bar">
-      <div class="player-info">
-        <img id="image_player" src="" alt="Miniatura do personagem">
-        <span id="player_name">Player</span>
-      </div>
 
+  <!-- Adicionado: estilos do toggle de som (do Uiverse) -->
+  <style>
+/* From Uiverse.io by ElsayedShamsEldeen */
+.toggleSwitch {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: red;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  overflow: hidden;
+}
+
+/* Hide default HTML checkbox */
+#checkboxInput {
+  display: none;
+}
+
+.bell {
+  width: 18px;
+}
+
+.bell path {
+  fill: white;
+}
+
+.speaker {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition-duration: 0.3s;
+  opacity: 0;
+}
+
+.speaker svg {
+  width: 18px;
+}
+
+.mute-speaker {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  z-index: 3;
+  transition-duration: 0.3s;
+}
+
+.mute-speaker svg {
+  width: 18px;
+}
+
+#checkboxInput:checked + .toggleSwitch .speaker {
+  opacity: 1;
+  transition-duration: 0.3s;
+  background-color: green;
+}
+
+#checkboxInput:checked + .toggleSwitch .mute-speaker {
+  opacity: 0;
+  transition-duration: 0.3s;
+}
+
+#checkboxInput:active + .toggleSwitch {
+  transform: scale(0.7);
+}
+
+#checkboxInput:hover + .toggleSwitch {
+  background-color: rgb(61, 61, 61);
+}
+  </style>
+</head>
+// ...existing code...
       <div class="controls">
         <button id="restart">Reiniciar</button>
         <a href="../../index.html">Trocar personagem</a>
-        <img src="../svg/muted.svg" id="volume" alt="volume">
+
+        <!-- Substituído: toggle do som (checkbox + design Uiverse) -->
+        <input id="checkboxInput" type="checkbox" aria-label="Alternar som" />
+        <label class="toggleSwitch" for="checkboxInput" title="Som">
+          <div class="speaker" aria-hidden="true">
+            <svg viewBox="0 0 75 75" version="1.0" xmlns="http://www.w3.org/2000/svg">
+              <path style="stroke:#fff;stroke-width:5;stroke-linejoin:round;fill:#fff;"
+                d="M39.389,13.769 L22.235,28.606 L6,28.606 L6,47.699 L21.989,47.699 L39.389,62.75 L39.389,13.769z"></path>
+              <path style="fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round"
+                d="M48,27.6a19.5,19.5 0 0 1 0,21.4M55.1,20.5a30,30 0 0 1 0,35.6M61.6,14a38.8,38.8 0 0 1 0,48.6"></path>
+            </svg>
+          </div>
+
+          <div class="mute-speaker" aria-hidden="true">
+            <svg stroke-width="5" stroke="#fff" viewBox="0 0 75 75" version="1.0">
+              <path stroke-linejoin="round" fill="#fff" d="m39,14-17,15H6V48H22l17,15z"></path>
+              <path stroke-linecap="round" fill="#fff" d="m49,26 20,24m0-24-20,24"></path>
+            </svg>
+          </div>
+        </label>
       </div>
     </header>
+// ...existing code...
 
-    <!-- Canvas e área de código -->
-    <section class="main-section">
-      <canvas id="gameCanvas" width="800" height="480"></canvas>
+  <!-- Substituído: audio com id e múltiplas fontes -->
+  <audio id="bgAudio" loop>
+    <source src="../audio/music.mp3" type="audio/mpeg">
+    <source src="../audio/music.ogg" type="audio/ogg">
+    <source src="../audio/music.mp4" type="audio/mp4">
+    Seu navegador não suporta reprodução de áudio.
+  </audio>
 
-      <div class="code-panel">
-        <h2>Digite seu código:</h2>
-        <textarea id="codeInput" placeholder="Ex: mover('direita')"></textarea>
-        <button id="runButton">Executar</button>
-        <p id="feedback"></p>
-      </div>
-    </section>
-  </main>
+  <!-- Biblioteca GSAP (mover antes de world.js se world.js usa gsap) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+    integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <audio src="../audio/music.mp3" loop></audio>
   <script src="../js/world.js"></script>
-
-  <!-- Biblioteca GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
-  integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- Seus arquivos JS -->
 <script src="../js/characterSettings.js"></script>
@@ -49,43 +136,56 @@
 <script src="../js/classes.js"></script>
 <script src="../js/game.js"></script>
 
+// ...existing code...
 <!-- Script de inicialização -->
 <script>
-  // Reiniciar o jogo
-  document.querySelector('#restart').addEventListener('click', () => {
-    window.location.reload();
-  });
+  // Reiniciar o jogo (anexa apenas uma vez)
+  const restartBtn = document.querySelector('#restart');
+  if (restartBtn && !restartBtn.dataset.attached) {
+    restartBtn.addEventListener('click', () => { window.location.reload(); });
+    restartBtn.dataset.attached = 'true';
+  }
 
-  // Controle de volume
-  const volume = document.querySelector('#volume');
-  const audio = document.querySelector('audio');
-  volume.addEventListener('click', () => {
-    if (volume.src.includes('muted.svg')) {
-      volume.src = '../volume.svg';
-      audio.currentTime = 0;
-      audio.volume = 0.1;
-      audio.play();
-    } else {
-      volume.src = '../svg/muted.svg';
-      audio.pause();
-    }
-  });
-</script>
+  // Controle de volume via checkbox toggle (usa #bgAudio)
+  (function(){
+    const checkbox = document.querySelector('#checkboxInput');
+    const audio = document.querySelector('#bgAudio');
 
+    if (!checkbox || !audio) return;
 
-  <script>
-    // 🧍‍♂️ Carregar personagem do localStorage
-    let playerOne = localStorage.getItem('PlayerOne') || 'knight';
+    // padrão: mudo até o usuário interagir
+    checkbox.checked = false;
+    audio.volume = 0.1;
+
+    checkbox.addEventListener('change', () => {
+      if (checkbox.checked) {
+        const p = audio.play();
+        if (p !== undefined) p.catch(err => console.warn('Falha ao tocar áudio:', err));
+      } else {
+        audio.pause();
+      }
+    });
+  })();
+
+  // Carregar personagem com fallback se imagem ausente
+  (function(){
+    const playerOne = localStorage.getItem('PlayerOne') || 'knight';
     const playerImg = document.querySelector('#image_player');
     const playerName = document.querySelector('#player_name');
+    const defaultSrc = '../imagens/default.png';
+    const srcPath = `../imagens/${playerOne}.png`;
 
-    playerImg.src = `../imagens/${playerOne}.png`;
-    playerName.textContent = playerOne;
+    if (!playerImg) return;
 
-    // 🔄 Reiniciar jogo
-    document.querySelector('#restart').addEventListener('click', () => {
-      window.location.reload();
-    });
-  </script>
-</body>
-</html>
+    playerImg.src = defaultSrc;
+
+    fetch(srcPath, { method: 'HEAD' })
+      .then(res => { if (res.ok) playerImg.src = srcPath; else playerImg.src = defaultSrc; })
+      .catch(() => { playerImg.src = defaultSrc; });
+
+    playerImg.onerror = () => { playerImg.onerror = null; playerImg.src = defaultSrc; };
+
+    if (playerName) playerName.textContent = playerOne;
+  })();
+</script>
+// ...existing code...
