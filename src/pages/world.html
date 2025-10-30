@@ -41,17 +41,19 @@
     </header>
 
     <!-- Canvas e área de código -->
-    <section class="main-section">
-      <canvas id="gameCanvas" width="800" height="480"></canvas>
+<section class="main-section">
+  <div class="game-area">
+    <canvas id="gameCanvas" width="960" height="540"></canvas>
+  </div>
 
-      <div class="code-panel">
-        <h2>Digite seu código:</h2>
-        <textarea id="codeInput" placeholder="Ex: mover('direita')"></textarea>
-        <button id="runButton">Executar</button>
-        <p id="feedback"></p>
-      </div>
-    </section>
-  </main>
+  <div class="code-panel">
+    <h2>Digite seu código:</h2>
+    <textarea id="codeInput" placeholder="Ex: mover('direita')"></textarea>
+    <button id="runButton">Executar</button>
+    <p id="feedback"></p>
+  </div>
+</section>
+
 
   <audio src="../audio/music.mp3" loop></audio>
 
